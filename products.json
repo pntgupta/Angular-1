@@ -1,0 +1,22 @@
+{"products":[{
+	"name":"Shirt",
+	"desc":"Description 1",
+	"price":2000,
+	"available":true
+},
+{
+	"name":"Pant",
+	"desc":"Description 2",
+	"price":3000,
+	"available":false
+}],
+"reviews":[{
+	"name": "Punit",
+	"comments": "Yeah!",
+	"stars": 5
+},
+{
+	"name": "Prateek",
+	"comments": "OK",
+	"stars": 3
+}]}

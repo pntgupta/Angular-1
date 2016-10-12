@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html ng-app ="store">
+<head>
+	<link rel="stylesheet" type="text/css" href="angular.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-cookies.js"></script>
+	<script type="text/javascript" src="angular.js"></script>
+	<title></title>
+</head>
+<body>
+	<section ng-controller="tabController as tabCtrl">
+		<div class="row">
+			<ul class="nav nav-tabs">
+				<li ng-class="{active : tabCtrl.isTab(1)}"><a href="#" ng-click="tabCtrl.selectTab(1)">Products</a></li>
+				<li ng-class="{active : tabCtrl.isTab(2)}"><a href="#" ng-click="tabCtrl.selectTab(2)">Comments</a></li>
+			</ul>
+		</div>
+		<div class="panel" ng-controller="storeCtrl as store">
+			<div ng-show="tabCtrl.isTab(1)" ng-repeat="pdt in store.products">
+				<p>Name : {{pdt.name}}</p>
+				<p>Desc : {{pdt.desc}}</p>
+				<p>Price : {{pdt.price | currency}}</p>
+				<button ng-show="pdt.available">Buy</button>
+			</div>
+			<div ng-show="tabCtrl.isTab(2)">
+				<div ng-repeat="rev in store.reviews">
+					<p>Name : {{rev.name}}</p>
+					<p>Comments : {{rev.comments}}</p>
+					<p>Stars : {{rev.stars}}</p>
+				</div>
+				<form ng-controller="submitController as submitCtrl" ng-submit="submitCtrl.save(store.reviews)">
+					<p>Name : {{submitCtrl.review.name}}</p>
+					<p>Comments : {{submitCtrl.review.comment}}</p>
+					<p>Stars : {{submitCtrl.review.stars}}</p>
+					<p>Add New comment : </p>
+					Name : <input type="textArea" ng-model="submitCtrl.review.name"/></br>
+					Comment : <input type="textArea" ng-model="submitCtrl.review.comment"/></br>
+					<select name ="dropdown" ng-model="submitCtrl.review.stars">
+					  <option value="1" Selected>1</option>
+					  <option value="2">2</option>
+					  <option value="3">3</option>
+					  <option value="4">4</option>
+					  <option value="5">5</option>
+					</select>
+					<input type="submit" value="Submit"/>
+				</form>
+			</div>
+		</div>
+	</section>
+</body>
+</html>
