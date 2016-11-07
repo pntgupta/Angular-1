@@ -1,16 +1,16 @@
 (function(){
 	var app=angular.module("store",['ngCookies']);
 
-	app.controller("storeCtrl",['$http','$cookies',function($http,$cookies){
+	app.controller("storeCtrl",['$cookies',function($cookies){
 		var self=this;
-		$http.get('products.json').success(function(data){
-				self.products=data.products;
+		$.get("/products.json",function(data){
+			self.products=data.products;
 
-				if($cookies.getObject('store_reviews') == undefined)
+			if($cookies.getObject('store_reviews') == undefined)
 					$cookies.putObject('store_reviews',data.reviews);
 
 				self.reviews=$cookies.getObject('store_reviews');
-			});
+		});
 	}]);
 
 	app.controller("tabController",function(){
@@ -20,7 +20,7 @@
 			this.tab=tab;
 		}
 		this.isTab = function(tab)
-		{
+		{debugger;
 			return this.tab==tab;
 		}
 	});
